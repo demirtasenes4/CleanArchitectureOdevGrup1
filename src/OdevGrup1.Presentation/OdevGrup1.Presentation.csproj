@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Abstractions\**" />
-    <Compile Remove="Controllers\**" />
     <EmbeddedResource Remove="Abstractions\**" />
-    <EmbeddedResource Remove="Controllers\**" />
     <None Remove="Abstractions\**" />
-    <None Remove="Controllers\**" />
   </ItemGroup>
 
 </Project>
