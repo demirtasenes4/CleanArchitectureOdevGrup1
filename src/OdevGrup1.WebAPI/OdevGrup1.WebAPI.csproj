@@ -8,17 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\**" />
+    <Compile Remove="Middlewares\**" />
     <Content Remove="Controllers\**" />
+    <Content Remove="Middlewares\**" />
     <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Middlewares\**" />
     <None Remove="Controllers\**" />
+    <None Remove="Middlewares\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>

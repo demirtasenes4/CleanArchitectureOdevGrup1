@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="Options\" />
+    <Compile Remove="Features\**" />
+    <Compile Remove="Options\**" />
+    <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Features\**" />
+    <EmbeddedResource Remove="Options\**" />
+    <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Features\**" />
+    <None Remove="Options\**" />
+    <None Remove="Utilities\**" />
   </ItemGroup>
 
 </Project>
