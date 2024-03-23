@@ -1,10 +1,11 @@
-using OdevGrup1.Presentation;
+using OdevGrup1.Application;
+using OdevGrup1.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddPresentation(builder.Configuration);
+builder.Services.AddApplication();
+builder.Services.AddPersistance(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

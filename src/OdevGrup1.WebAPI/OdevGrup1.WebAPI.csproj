@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OdevGrup1.Application\OdevGrup1.Application.csproj" />
+    <ProjectReference Include="..\OdevGrup1.Domain\OdevGrup1.Domain.csproj" />
+    <ProjectReference Include="..\OdevGrup1.Infrastructure\OdevGrup1.Infrastructure.csproj" />
+    <ProjectReference Include="..\OdevGrup1.Persistence\OdevGrup1.Persistence.csproj" />
     <ProjectReference Include="..\src\OdevGrup1.Presentation\OdevGrup1.Presentation.csproj" />
   </ItemGroup>
 
