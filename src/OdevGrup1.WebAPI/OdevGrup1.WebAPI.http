@@ -1,6 +1,0 @@
-@OdevGrup1.WebAPI_HostAddress = http://localhost:5223
-
-GET {{OdevGrup1.WebAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

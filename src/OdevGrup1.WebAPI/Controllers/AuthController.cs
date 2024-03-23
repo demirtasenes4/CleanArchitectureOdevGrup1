@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OdevGrup1.Application.Features.Auth.Login;
 using OdevGrup1.Application.Features.Auth.Register;
@@ -13,6 +14,7 @@ public class AuthController : ApiController
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Login(LoginCommand request, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request, cancellationToken);
