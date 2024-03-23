@@ -11,10 +11,4 @@ public class InvestmentsController : ApiController
     {
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(RegisterCommand request, CancellationToken cancellationToken)
-    {
-        var response = await _mediator.Send(request, cancellationToken);
-        return StatusCode(response.StatusCode, response);
-    }
 }

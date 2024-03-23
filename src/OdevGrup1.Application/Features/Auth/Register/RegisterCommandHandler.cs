@@ -1,11 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using OdevGrup1.Domain.Entities;
 using TS.Result;
 
 namespace OdevGrup1.Application.Features.Auth.Register;
-internal sealed class RegisterCommandHandler(UserManager<AppUser> userManager, IMapper mapper) : IRequestHandler<RegisterCommand, Result<string>>
+internal sealed class RegisterCommandHandler(UserManager<AppUser> userManager) : IRequestHandler<RegisterCommand, Result<string>>
 {
     public async Task<Result<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
@@ -15,7 +14,13 @@ internal sealed class RegisterCommandHandler(UserManager<AppUser> userManager, I
             return Result<string>.Failure("Password and password repeat do not match.");
         }
 
-        AppUser? user = mapper.Map<AppUser>(request);
+        AppUser? user = new()
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            UserName = request.UserName
+        };
 
         var result = await userManager.CreateAsync(user, request.Password);
         if (!result.Succeeded)
