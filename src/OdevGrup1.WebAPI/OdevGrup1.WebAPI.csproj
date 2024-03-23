@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +16,6 @@
     <ProjectReference Include="..\OdevGrup1.Domain\OdevGrup1.Domain.csproj" />
     <ProjectReference Include="..\OdevGrup1.Infrastructure\OdevGrup1.Infrastructure.csproj" />
     <ProjectReference Include="..\OdevGrup1.Persistence\OdevGrup1.Persistence.csproj" />
-    <ProjectReference Include="..\src\OdevGrup1.Presentation\OdevGrup1.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
