@@ -14,15 +14,15 @@ internal sealed class LoginCommandHandler(UserManager<AppUser> userManager) : IR
 
         if (user is null)
         {
-            return Result<string>.Failure("User not found");
+            return Result<string>.Failure("User not found!");
         }
 
         bool checkPassword = await userManager.CheckPasswordAsync(user, request.Password);
         if (!checkPassword)
         {
-            throw new ArgumentException("Şifre yanlış!");
+            throw new ArgumentException("Incorrect password!");
         }
 
-        return Result<string>.Succeed("Kullanıcı girişi başarılı");
+        return Result<string>.Succeed("User login successful!");
     }
 }

@@ -25,7 +25,7 @@ internal sealed class RegisterCommandHandler(UserManager<AppUser> userManager) :
         var result = await userManager.CreateAsync(user, request.Password);
         if (!result.Succeeded)
         {
-            return Result<string>.Failure("An error occurred while registering, please try again.");
+            return Result<string>.Failure("Please ensure to use at least one upper case letter and one special character in password.");
         }
 
         return Result<string>.Succeed("User created successfully");
