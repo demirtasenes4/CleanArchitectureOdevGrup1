@@ -1,69 +1,131 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OdevGrup1.Application.Repositories;
-using OdevGrup1.Persistence.Context;
 using System.Linq.Expressions;
 
 namespace OdevGrup1.Persistence.Repositories;
-internal class Repository<T>(AppDbContext context) : IRepository<T>
+internal class Repository<T, Context> : IRepository<T>
     where T : class
+    where Context : DbContext
 {
+    private readonly Context _context;
+    private DbSet<T> _entity;
+
+    public Repository(Context context)
+    {
+        _context = context;
+        _entity = _context.Set<T>();
+    }
+
+    public void Add(T entity)
+    {
+        _entity.Add(entity);
+    }
+
     public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        await context.Set<T>().AddAsync(entity, cancellationToken);
+        await _entity.AddAsync(entity, cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task AddRangeAsync(List<T> entities, CancellationToken cancellationToken)
+    public async Task AddRangeAsync(ICollection<T> entities, CancellationToken cancellationToken = default)
     {
-        await context.Set<T>().AddRangeAsync(entities, cancellationToken);
-    }
-
-    public void Update(T entity)
-    {
-        context.Set<T>().Update(entity);
-    }
-
-    public void UpdateRange(List<T> entities)
-    {
-        context.Set<T>().UpdateRange(entities);
-    }
-
-    public void Remove(T entity)
-    {
-        context.Set<T>().Remove(entity);
-    }
-
-    public void RemoveRange(List<T> entities)
-    {
-        context.Set<T>().RemoveRange(entities);
-    }
-
-    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-    {
-        return await context.Set<T>().AnyAsync(predicate, cancellationToken);
-    }
-
-    public IQueryable<T> GetAll()
-    {
-        return context.Set<T>().AsQueryable();
-    }
-
-    public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-    {
-        return await context.Set<T>().Where(predicate).FirstOrDefaultAsync(cancellationToken);
-    }
-
-    public IQueryable<T> GetWhere(Expression<Func<T, bool>> predicate)
-    {
-        return context.Set<T>().Where(predicate).AsQueryable();
+        await _entity.AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
     }
 
     public bool Any(Expression<Func<T, bool>> predicate)
     {
-        return context.Set<T>().Any(predicate);
+        return _entity.Any(predicate);
     }
 
-    public async Task<T> GetFirst()
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        return await context.Set<T>().FirstOrDefaultAsync();
+        return await _entity.AnyAsync(predicate, cancellationToken);
+    }
+
+    public void Delete(T entity)
+    {
+        _entity.Remove(entity);
+    }
+
+    public async Task DeleteByExpressionAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        var entity = await _entity.Where(predicate).AsNoTracking().FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+        _entity.Remove(entity);
+    }
+
+    public async Task DeleteByIdAsync(string id)
+    {
+        var entity = await _entity.FindAsync(id).ConfigureAwait(false);
+        _entity.Remove(entity);
+    }
+
+    public void DeleteRange(ICollection<T> entities)
+    {
+        _entity.RemoveRange(entities);
+    }
+
+    public IQueryable<T> GetAll()
+    {
+        return _entity.AsNoTracking().AsQueryable();
+    }
+
+    public IQueryable<T> GetAllWithTacking()
+    {
+        return _entity.AsQueryable();
+    }
+
+    public T GetByExpression(Expression<Func<T, bool>> predicate)
+    {
+        var entity = _entity.Where(predicate).AsNoTracking().FirstOrDefault();
+        return entity;
+    }
+
+    public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        var entity = await _entity.Where(predicate).AsNoTracking().FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+        return entity;
+    }
+
+    public T GetByExpressionWithTracking(Expression<Func<T, bool>> predicate)
+    {
+        var entity = _entity.Where(predicate).FirstOrDefault();
+        return entity;
+    }
+
+    public async Task<T> GetByExpressionWithTrackingAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        var entity = await _entity.Where(predicate).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+        return entity;
+    }
+
+    public T GetFirst()
+    {
+        var entity = _entity.AsNoTracking().FirstOrDefault();
+        return entity;
+    }
+
+    public async Task<T> GetFirstAsync(CancellationToken cancellationToken = default)
+    {
+        var entity = await _entity.AsNoTracking().FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+        return entity;
+    }
+
+    public IQueryable<T> GetWhere(Expression<Func<T, bool>> predicate)
+    {
+        return _entity.AsNoTracking().Where(predicate).AsQueryable();
+    }
+
+    public IQueryable<T> GetWhereWithTracking(Expression<Func<T, bool>> predicate)
+    {
+        return _entity.Where(predicate).AsQueryable();
+    }
+
+    public void Update(T entity)
+    {
+        _entity.Update(entity);
+    }
+
+    public void UpdateRange(ICollection<T> entities)
+    {
+        _entity.UpdateRange(entities);
     }
 }
