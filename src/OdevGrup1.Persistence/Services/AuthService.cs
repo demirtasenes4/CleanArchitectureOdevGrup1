@@ -8,7 +8,7 @@ using OdevGrup1.Domain.Entities;
 using TS.Result;
 
 namespace OdevGrup1.Persistence.Services;
-internal class AuthService(UserManager<AppUser> userManager, IMapper mapper) : IAuthService
+public sealed class AuthService(UserManager<AppUser> userManager, IMapper mapper) : IAuthService
 {
     public async Task<Result<string>> CreateAsync(RegisterCommand request, CancellationToken cancellationToken)
     {
