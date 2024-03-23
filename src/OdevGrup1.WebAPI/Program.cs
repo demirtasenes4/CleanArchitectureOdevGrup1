@@ -6,10 +6,12 @@ using OdevGrup1.Persistence.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistance(builder.Configuration);
+
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 
