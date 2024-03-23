@@ -11,8 +11,6 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddApplication();
 builder.Services.AddPersistance(builder.Configuration);
-//builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
