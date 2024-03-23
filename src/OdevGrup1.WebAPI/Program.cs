@@ -1,35 +1,40 @@
+using OdevGrup1.Presentation;
 
-namespace OdevGrup1.WebAPI;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+builder.Services.AddCors(cfr =>
 {
-    public static void Main(string[] args)
+    cfr.AddDefaultPolicy(plc =>
     {
-        var builder = WebApplication.CreateBuilder(args);
+        plc.AllowAnyHeader();
+        plc.AllowAnyMethod();
+        plc.AllowAnyOrigin();
+        plc.SetIsOriginAllowed(plc => true);
+    });
+});
 
-        // Add services to the container.
-
-        builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
+builder.Services.AddPresentation(builder.Configuration);
 
 
-        app.MapControllers();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-        app.Run();
-    }
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseCors();
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+
+app.MapControllers();
+
+app.Run();

@@ -12,4 +12,8 @@
     <None Remove="Migrations\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OdevGrup1.Domain\OdevGrup1.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
