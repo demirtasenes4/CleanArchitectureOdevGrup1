@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using OdevGrup1.Application.Behaviors;
 
 namespace OdevGrup1.Application;
 public static class DependencyInjection
@@ -13,7 +14,7 @@ public static class DependencyInjection
             configuration.RegisterServicesFromAssemblies(
                 typeof(DependencyInjection).Assembly);
 
-            //configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         services.AddAutoMapper(typeof(DependencyInjection).Assembly);

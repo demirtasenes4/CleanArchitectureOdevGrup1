@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OdevGrup1.Domain.Abstraction;
 
 namespace OdevGrup1.Domain.Entities;
-public sealed class Portfolio
+public sealed class Portfolio : Entity
 {
-    public int Id { get; set; }
     public Guid UserId { get; set; }
     public AppUser? User { get; set; }
     public ICollection<Investment>? Investments { get; set; }

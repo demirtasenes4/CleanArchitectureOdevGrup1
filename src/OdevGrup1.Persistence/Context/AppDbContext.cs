@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OdevGrup1.Domain.Entities;
+using OdevGrup1.Domain.Repositories;
 
 namespace OdevGrup1.Persistence.Context;
-internal sealed class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
+internal sealed class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>, IUnitOfWork
 {
     public AppDbContext(DbContextOptions options) : base(options)
     {
