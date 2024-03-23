@@ -6,6 +6,6 @@ internal sealed class RegisterCommandValidator : AbstractValidator<RegisterComma
 {
     public RegisterCommandValidator()
     {
-        RuleFor(u => u.Username).NotNull().NotEmpty().WithMessage("UserName not null");
+        RuleFor(u => u.UserName).NotNull().NotEmpty().WithMessage("UserName not null");
     }
 }

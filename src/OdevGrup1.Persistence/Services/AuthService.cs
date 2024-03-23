@@ -21,9 +21,9 @@ public sealed class AuthService(UserManager<AppUser> userManager, IMapper mapper
             }
         }
 
-        if (request.Username is not null)
+        if (request.UserName is not null)
         {
-            var isUserNameExists = await userManager.Users.AnyAsync(u => u.UserName == request.Username);
+            var isUserNameExists = await userManager.Users.AnyAsync(u => u.UserName == request.UserName);
             if (isUserNameExists)
             {
                 return Result<string>.Failure(StatusCodes.Status409Conflict, "UserName already has taken");
