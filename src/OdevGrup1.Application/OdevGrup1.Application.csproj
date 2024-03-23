@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Auth\Login\**" />
     <Compile Remove="Utilities\**" />
+    <EmbeddedResource Remove="Features\Auth\Login\**" />
     <EmbeddedResource Remove="Utilities\**" />
+    <None Remove="Features\Auth\Login\**" />
     <None Remove="Utilities\**" />
   </ItemGroup>
 
@@ -23,10 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OdevGrup1.Domain\OdevGrup1.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Auth\Login\" />
   </ItemGroup>
 
 </Project>
