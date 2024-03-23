@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace OdevGrup1.WebAPI.Abstraction;
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ApiController : ControllerBase
 {
