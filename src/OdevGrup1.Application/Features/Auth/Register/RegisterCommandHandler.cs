@@ -8,7 +8,7 @@ internal sealed class RegisterCommandHandler(IAuthService authService) : IReques
     public async Task<Result<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
         var result = await authService.CreateAsync(request, cancellationToken);
-
+        
         return result;
 
     }
